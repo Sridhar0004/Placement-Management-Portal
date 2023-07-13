@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{%extends "campus/base.html"%}
+{%block body_block%}
+{% load static %}
+<!-- <script type = "text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"> </script>
+-->
+<script type='text/javascript' src="{% static 'campus/js/jquery- 3.3.1.min.js' %}"></script>
+
+<div class="container-fluid">
+
+<div class="row">
+<div class="col-md-6 mx-auto text-center mb-5 section-heading">
+<br>
+<h2 class="text-success">Department Incharge Register</h2>
+</div>
+</div>
+</div>
+<div class="container">
+<div class="jumbotron" style="background-color: gainsboro !important;">
+<div class="login">
+{% if messages %}
+<ul>
+{% for message in messages %}
+<li>{{ message }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+{% if form.errors %}
+{% for field in form %}
+{% for error in field.errors %}
+<div class="alert alert-danger" style="color: #bd2130;">
+<strong>{{ error|escape }}</strong>
+</div>
+{% endfor %}
+{% endfor %}
+{% for error in form.non_field_errors %}
+<div class="alert alert-danger">
+<strong style="color: #bd2130"> {{ error|escape }}</strong>
+</div>
+{% endfor %}
+{% endif %}
+
+<form method="post" action='{% url "dept_register" %}'>
+{% csrf_token %}
+<table>
+{{ form.as_table }}
+<tr>
+<td></td>
+<td><button type="submit" class="btn btn-sm btn- primary" name="submit" value="Register";>REGISTER</button></td>
+</tr>
+</table>
+</form>
+</div>
+</div>
+</div>
+<script>
+$(document).ready(function(){
+$('[for="id_hr_name"]').html('Department')
+$('.helptext').addClass('d-none')
+})
+</script>
+{%endblock%}
